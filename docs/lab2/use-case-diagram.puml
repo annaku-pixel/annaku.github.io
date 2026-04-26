@@ -1,0 +1,32 @@
+@startuml
+
+left to right direction
+
+actor "Користувач" as User
+actor "Зовнішній AI-сервіс" as AI
+
+rectangle "Система AnswerBetter" {
+
+  usecase "Введення або вставлення тексту" as UC01
+  usecase "Вибір бажаного тону" as UC02
+  usecase "Генерація покращеного повідомлення" as UC03
+
+  usecase "Відображення результату" as UC04
+  usecase "Копіювання згенерованого тексту" as UC05
+  usecase "Збереження відповіді в історію" as UC06
+  usecase "Перегляд історії відповідей" as UC07
+}
+
+User --> UC01
+User --> UC02
+User --> UC05
+User --> UC07
+
+AI --> UC03
+
+UC03 ..> UC01 : <<include>>
+UC03 ..> UC02 : <<include>>
+UC03 ..> UC04 : <<include>>
+UC03 ..> UC06 : <<include>>
+
+@enduml
