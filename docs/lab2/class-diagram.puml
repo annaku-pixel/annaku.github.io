@@ -1,0 +1,57 @@
+@startuml
+
+class User {
+  - userId : int
+  - name : String
+  - email : String
+  + enterText(content : String) : InputMessage
+  + selectTone(t : ToneOption) : void
+  + copyResponse(r : GeneratedResponse) : String
+  + viewHistory() : List<GeneratedResponse>
+}
+
+class InputMessage {
+  - messageId : int
+  - content : String
+  - createdAt : Date
+  + getText() : String
+  + setText(text : String) : void
+}
+
+class ToneOption {
+  - toneId : int
+  - name : String
+  - description : String
+  + getToneInfo() : String
+}
+
+class GeneratedResponse {
+  - responseId : int
+  - originalText : String
+  - improvedText : String
+  - createdAt : Date
+  + display() : String
+  + copy() : String
+}
+
+class AIService {
+  + generateResponse(msg : InputMessage, tone : ToneOption) : GeneratedResponse
+}
+
+class HistoryService {
+  - responses : List<GeneratedResponse>
+  + saveResponse(r : GeneratedResponse) : void
+  + getRecentResponses() : List<GeneratedResponse>
+}
+
+User "1" -- "*" InputMessage : creates
+User "1" -- "*" GeneratedResponse : receives
+InputMessage "1" --> "1" ToneOption : uses
+AIService ..> InputMessage : processes
+AIService ..> ToneOption : applies
+AIService ..> GeneratedResponse : creates
+HistoryService "1" o-- "*" GeneratedResponse : stores
+User ..> AIService : uses
+User ..> HistoryService : uses
+
+@enduml
