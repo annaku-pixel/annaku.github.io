@@ -1,0 +1,35 @@
+@startuml
+
+actor "Користувач" as U
+
+participant ":User" as User
+participant ":InputMessage" as Msg
+participant ":ToneOption" as Tone
+participant ":AIService" as AI
+participant ":GeneratedResponse" as Resp
+participant ":HistoryService" as Hist
+
+U -> User : enterText(content)
+User -> Msg : new InputMessage(content)
+Msg --> User : msg
+
+U -> User : selectTone(tone)
+User -> Tone : getToneInfo()
+Tone --> User : toneInfo
+
+User -> AI : generateResponse(msg, tone)
+
+AI -> Resp : new GeneratedResponse(originalText, improvedText, createdAt)
+Resp --> AI : response
+
+AI --> User : response
+
+User -> Hist : saveResponse(response)
+Hist --> User : saved
+
+User -> Resp : display()
+Resp --> User : improvedText
+
+User --> U : відображення результату
+
+@enduml
