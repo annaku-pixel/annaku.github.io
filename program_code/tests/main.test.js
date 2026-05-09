@@ -9,7 +9,7 @@ beforeAll(() => {
     <div id="result"></div>
     <ul id="history"></ul>
   `;
-  ({ history, inputText, formatPunctuation, generateMessage, saveToHistory, copyResult } = require("./main"));
+  ({ history, inputText, formatPunctuation, generateMessage, saveToHistory, copyResult } = require("../main"));
 });
 
 describe("Куцевич tests", () => {
