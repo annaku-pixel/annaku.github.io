@@ -110,3 +110,50 @@ describe("Рижова tests", () => {
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(text);
   });
 });
+
+
+
+test("extra click on generateBtn shows generated result and saves history", () => {
+  document.body.innerHTML = `
+    <textarea id="message"></textarea>
+    <select id="tone">
+      <option value="formal">formal</option>
+      <option value="friendly">friendly</option>
+      <option value="professional">professional</option>
+    </select>
+    <button id="generateBtn"></button>
+    <button id="copyBtn"></button>
+    <div id="result"></div>
+    <ul id="history"></ul>
+  `;
+
+  jest.resetModules();
+  const app = require("./main");
+
+  document.getElementById("message").value = "я вивчив фігму";
+  document.getElementById("tone").value = "formal";  document.getElementById("generateBtn").click();  expect(document.getElementById("result").textContent)
+    .toBe("Добрий день, я вивчив фігму");
+  expect(document.getElementById("history").children.length).toBe(1);
+});
+
+test("extra click on generateBtn shows error message for empty input", () => {
+  document.body.innerHTML = `
+    <textarea id="message"></textarea>
+    <select id="tone">
+      <option value="formal">formal</option>
+    </select>
+    <button id="generateBtn"></button>
+    <button id="copyBtn"></button>
+    <div id="result"></div>
+    <ul id="history"></ul>
+  `;
+
+  jest.resetModules();
+  require("./main");
+
+  document.getElementById("message").value = "   ";
+  document.getElementById("tone").value = "formal";
+  document.getElementById("generateBtn").click();
+  expect(document.getElementById("result").textContent)
+    .toBe("Text cannot be empty");
+});
