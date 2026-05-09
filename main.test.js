@@ -1,11 +1,16 @@
-const {
-  history,
-  inputText,
-  formatPunctuation,
-  generateMessage,
-  saveToHistory,
-  copyResult,
-} = require("./main");
+let history, inputText, formatPunctuation, generateMessage, saveToHistory, copyResult;
+
+beforeAll(() => {
+  document.body.innerHTML = `
+    <input id="message" />
+    <select id="tone"></select>
+    <button id="generateBtn"></button>
+    <button id="copyBtn"></button>
+    <div id="result"></div>
+    <ul id="history"></ul>
+  `;
+  ({ history, inputText, formatPunctuation, generateMessage, saveToHistory, copyResult } = require("./main"));
+});
 
 describe("Куцевич tests", () => {
   beforeEach(() => {

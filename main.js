@@ -106,3 +106,12 @@ copyBtn.addEventListener("click", () => {
     resultBlock.textContent = error.message;
   }
 });
+
+module.exports = {
+  history,
+  inputText,
+  formatPunctuation,
+  generateMessage,
+  saveToHistory,
+  copyResult
+};

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1778341233029" clover="3.2.0">
+  <project timestamp="1778341233030" name="All files">
+    <metrics statements="53" coveredstatements="49" conditionals="14" coveredconditionals="14" methods="11" coveredmethods="10" elements="78" coveredelements="73" complexity="0" loc="53" ncloc="53" packages="1" files="1" classes="1"/>
+    <file name="main.js" path="C:\Users\User\OneDrive\Рабочий стол\OPI\annaku.github.io\main.js">
+      <metrics statements="53" coveredstatements="49" conditionals="14" coveredconditionals="14" methods="11" coveredmethods="10"/>
+      <line num="1" count="3" type="stmt"/>
+      <line num="2" count="3" type="stmt"/>
+      <line num="3" count="3" type="stmt"/>
+      <line num="4" count="3" type="stmt"/>
+      <line num="5" count="3" type="stmt"/>
+      <line num="6" count="3" type="stmt"/>
+      <line num="8" count="3" type="stmt"/>
+      <line num="11" count="10" type="cond" truecount="2" falsecount="0"/>
+      <line num="12" count="1" type="stmt"/>
+      <line num="15" count="9" type="stmt"/>
+      <line num="17" count="9" type="cond" truecount="2" falsecount="0"/>
+      <line num="18" count="2" type="stmt"/>
+      <line num="21" count="7" type="cond" truecount="2" falsecount="0"/>
+      <line num="22" count="1" type="stmt"/>
+      <line num="25" count="6" type="stmt"/>
+      <line num="29" count="6" type="stmt"/>
+      <line num="39" count="6" type="stmt"/>
+      <line num="40" count="8" type="stmt"/>
+      <line num="43" count="6" type="stmt"/>
+      <line num="44" count="4" type="stmt"/>
+      <line num="47" count="6" type="stmt"/>
+      <line num="51" count="5" type="stmt"/>
+      <line num="52" count="4" type="stmt"/>
+      <line num="54" count="4" type="cond" truecount="2" falsecount="0"/>
+      <line num="55" count="2" type="stmt"/>
+      <line num="56" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="57" count="1" type="stmt"/>
+      <line num="59" count="1" type="stmt"/>
+      <line num="62" count="4" type="stmt"/>
+      <line num="66" count="2" type="stmt"/>
+      <line num="67" count="2" type="stmt"/>
+      <line num="71" count="2" type="stmt"/>
+      <line num="73" count="2" type="stmt"/>
+      <line num="74" count="2" type="stmt"/>
+      <line num="75" count="2" type="stmt"/>
+      <line num="76" count="2" type="stmt"/>
+      <line num="81" count="2" type="cond" truecount="4" falsecount="0"/>
+      <line num="82" count="1" type="stmt"/>
+      <line num="85" count="1" type="stmt"/>
+      <line num="88" count="3" type="stmt"/>
+      <line num="89" count="2" type="stmt"/>
+      <line num="90" count="2" type="stmt"/>
+      <line num="91" count="2" type="stmt"/>
+      <line num="93" count="2" type="stmt"/>
+      <line num="94" count="1" type="stmt"/>
+      <line num="95" count="1" type="stmt"/>
+      <line num="97" count="1" type="stmt"/>
+      <line num="101" count="3" type="stmt"/>
+      <line num="102" count="0" type="stmt"/>
+      <line num="103" count="0" type="stmt"/>
+      <line num="104" count="0" type="stmt"/>
+      <line num="106" count="0" type="stmt"/>
+      <line num="110" count="3" type="stmt"/>
+    </file>
+  </project>
+</coverage>
