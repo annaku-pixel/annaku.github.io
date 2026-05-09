@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AnswerBetter</title>
+  </head>
+  <body>
+    <h1>AnswerBetter</h1>
+
+    <label for="message">Введіть текст:</label><br />
+    <textarea
+      id="message"
+      rows="8"
+      cols="60"
+      placeholder="Введіть повідомлення"
+    ></textarea>
+    <br /><br />
+
+    <label for="tone">Оберіть стиль:</label><br />
+    <select id="tone">
+      <option value="formal">Формальний</option>
+      <option value="friendly">Дружній</option>
+      <option value="professional">Професійний</option>
+    </select>
+    <br /><br />
+
+    <button id="generateBtn">Покращити повідомлення</button>
+
+    <h2>Результат</h2>
+    <div id="result"></div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
