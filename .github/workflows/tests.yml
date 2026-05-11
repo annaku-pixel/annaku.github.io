@@ -14,5 +14,8 @@ jobs:
           node-version: 20
 
       - run: npm install
+        working-directory: program_code/tests
       - run: npm test
+        working-directory: program_code/tests
       - run: npm run coverage
+        working-directory: program_code/tests
