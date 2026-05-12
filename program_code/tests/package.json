@@ -1,7 +1,7 @@
 {
   "name": "answerbetter-lab3",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "../main.js",
   "scripts": {
     "test": "jest",
     "coverage": "jest --coverage"
