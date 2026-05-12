@@ -128,7 +128,7 @@ test("extra click on generateBtn shows generated result and saves history", () =
   `;
 
   jest.resetModules();
-  const app = require("./main");
+  const app = require("../main");
 
   document.getElementById("message").value = "я вивчив фігму";
   document.getElementById("tone").value = "formal";  document.getElementById("generateBtn").click();  expect(document.getElementById("result").textContent)
@@ -149,7 +149,7 @@ test("extra click on generateBtn shows error message for empty input", () => {
   `;
 
   jest.resetModules();
-  require("./main");
+  require("../main");
 
   document.getElementById("message").value = "   ";
   document.getElementById("tone").value = "formal";
