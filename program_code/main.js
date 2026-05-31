@@ -1,17 +1,13 @@
-const messageInput = document.getElementById("message");
-const toneSelect = document.getElementById("tone");
-const generateBtn = document.getElementById("generateBtn");
-const copyBtn = document.getElementById("copyBtn");
 const resultBlock = document.getElementById("result");
 const historyList = document.getElementById("history");
- 
+
 const history = [];
 
 function inputText(text) {
   if (typeof text !== "string") {
     throw new TypeError("Text must be a string");
   }
- 
+
   const trimmed = text.trim();
 
   if (trimmed.length === 0) {
@@ -79,9 +75,6 @@ function generateMessage(text, tone) {
 
 function saveToHistory(result) {
   history.push(result);
-}
-
-function updateHistoryUI() {
   renderHistory();
 }
 
@@ -105,7 +98,20 @@ function copyResult(text) {
   return navigator.clipboard?.writeText?.(text) ?? text;
 }
 
-copyBtn.addEventListener("click", async () => {
+document.getElementById("generateBtn").addEventListener("click", () => {
+  try {
+    const text = document.getElementById("message").value;
+    const tone = document.getElementById("tone").value;
+
+    const result = generateMessage(text, tone);
+    resultBlock.textContent = result;
+    saveToHistory(result);
+  } catch (error) {
+    resultBlock.textContent = error.message;
+  }
+});
+
+document.getElementById("copyBtn").addEventListener("click", async () => {
   try {
     await copyResult(resultBlock.textContent);
     alert("Результат скопійовано");
@@ -114,20 +120,13 @@ copyBtn.addEventListener("click", async () => {
   }
 });
 
-copyBtn.addEventListener("click", () => {
-  try {
-    copyResult(resultBlock.textContent);
-    alert("Результат скопійовано");
-  } catch (error) {
-    resultBlock.textContent = error.message;
-  }
-});
-
-module.exports = {
-  history,
-  inputText,
-  formatPunctuation,
-  generateMessage,
-  saveToHistory,
-  copyResult
-};
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    history,
+    inputText,
+    formatPunctuation,
+    generateMessage,
+    saveToHistory,
+    copyResult
+  };
+}
