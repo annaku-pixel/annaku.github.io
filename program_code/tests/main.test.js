@@ -1,5 +1,5 @@
 let history, inputText, formatPunctuation, generateMessage, saveToHistory, copyResult;
-
+ 
 beforeAll(() => {
   document.body.innerHTML = `
     <input id="message" />
@@ -11,7 +11,7 @@ beforeAll(() => {
   `;
   ({ history, inputText, formatPunctuation, generateMessage, saveToHistory, copyResult } = require("../main"));
 });
-
+ 
 describe("Куцевич tests", () => {
   beforeEach(() => {
     history.length = 0;
