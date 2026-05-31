@@ -113,8 +113,7 @@ describe("Рижова tests", () => {
 
 
 
-  jest.resetModules();
-  const app = require("../main");
+jest.resetModules();
 
 test("extra click on generateBtn shows generated result and saves history", () => {
   document.body.innerHTML = `
@@ -130,15 +129,15 @@ test("extra click on generateBtn shows generated result and saves history", () =
     <ul id="history"></ul>
   `;
 
+  const app = require("../main");
+
   document.getElementById("message").value = "я вивчив фігму";
   document.getElementById("tone").value = "formal";  document.getElementById("generateBtn").click();  expect(document.getElementById("result").textContent)
     .toBe("Добрий день, я вивчив фігму");
   expect(document.getElementById("history").children.length).toBe(1);
 });
 
-  jest.resetModules();
-  require("../main");
-
+jest.resetModules();
 test("extra click on generateBtn shows error message for empty input", () => {
   document.body.innerHTML = `
     <textarea id="message"></textarea>
@@ -150,6 +149,8 @@ test("extra click on generateBtn shows error message for empty input", () => {
     <div id="result"></div>
     <ul id="history"></ul>
   `;
+
+  require("../main");
 
   document.getElementById("message").value = "   ";
   document.getElementById("tone").value = "formal";
