@@ -102,11 +102,7 @@ function copyResult(text) {
     throw new Error("Немає тексту для копіювання");
   }
 
-  if (!navigator.clipboard || !navigator.clipboard.writeText) {
-    return text;
-  }
-
-  return navigator.clipboard.writeText(text);
+  return navigator.clipboard?.writeText?.(text) ?? text;
 }
 
 copyBtn.addEventListener("click", async () => {
