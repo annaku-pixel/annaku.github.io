@@ -113,9 +113,9 @@ describe("Рижова tests", () => {
 
 
 
-jest.resetModules();
 
 test("extra click on generateBtn shows generated result and saves history", () => {
+  jest.resetModules();
   document.body.innerHTML = `
     <textarea id="message"></textarea>
     <select id="tone">
@@ -137,8 +137,8 @@ test("extra click on generateBtn shows generated result and saves history", () =
   expect(document.getElementById("history").children.length).toBe(1);
 });
 
-jest.resetModules();
 test("extra click on generateBtn shows error message for empty input", () => {
+  jest.resetModules();
   document.body.innerHTML = `
     <textarea id="message"></textarea>
     <select id="tone">
