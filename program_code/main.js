@@ -11,7 +11,7 @@ function inputText(text) {
   if (typeof text !== "string") {
     throw new TypeError("Text must be a string");
   }
-
+ 
   const trimmed = text.trim();
 
   if (trimmed.length === 0) {
