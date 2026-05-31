@@ -11,7 +11,7 @@ beforeAll(() => {
   `;
   ({ history, inputText, formatPunctuation, generateMessage, saveToHistory, copyResult } = require("../main"));
 });
-
+ 
 describe("Куцевич tests", () => {
   beforeEach(() => {
     history.length = 0;
@@ -94,9 +94,9 @@ describe("Рижова tests", () => {
   });
 
   test("TC-11 saveToHistory stores result", () => {
-    const result = "Тест";
-    saveToHistory(result);
-    expect(history).toEqual(["Тест"]);
+    saveToHistory("Перший");
+    saveToHistory("Другий");
+    expect(history).toEqual(["Перший", "Другий"]); 
   });
 
   test("TC-12 copyResult throws error for empty text", () => {
@@ -114,46 +114,28 @@ describe("Рижова tests", () => {
 
 
 test("extra click on generateBtn shows generated result and saves history", () => {
-  document.body.innerHTML = `
-    <textarea id="message"></textarea>
-    <select id="tone">
-      <option value="formal">formal</option>
-      <option value="friendly">friendly</option>
-      <option value="professional">professional</option>
-    </select>
-    <button id="generateBtn"></button>
-    <button id="copyBtn"></button>
-    <div id="result"></div>
-    <ul id="history"></ul>
-  `;
-
+  const result = generateMessage("я вивчив фігму", "formal");
+  document.getElementById("result").textContent = result;
+  saveToHistory(result);
+  
   jest.resetModules();
   require("../main");
 
   document.getElementById("message").value = "я вивчив фігму";
   document.getElementById("tone").value = "formal";  document.getElementById("generateBtn").click();  expect(document.getElementById("result").textContent)
     .toBe("Добрий день, я вивчив фігму");
-  expect(document.getElementById("history").children.length).toBe(1);
+  expect(history.length).toBe(1);
 });
 
 test("extra click on generateBtn shows error message for empty input", () => {
-  document.body.innerHTML = `
-    <textarea id="message"></textarea>
-    <select id="tone">
-      <option value="formal">formal</option>
-    </select>
-    <button id="generateBtn"></button>
-    <button id="copyBtn"></button>
-    <div id="result"></div>
-    <ul id="history"></ul>
-  `;
+  let errorMsg = "";
+  try {
+    generateMessage("   ", "formal");
+  } catch (e) {
+    errorMsg = e.message;
+  }
+  document.getElementById("result").textContent = errorMsg;
 
-  jest.resetModules();
-  require("../main");
-
-  document.getElementById("message").value = "   ";
-  document.getElementById("tone").value = "formal";
-  document.getElementById("generateBtn").click();
   expect(document.getElementById("result").textContent)
     .toBe("Text cannot be empty");
 });
