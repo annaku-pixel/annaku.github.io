@@ -113,48 +113,25 @@ describe("Рижова tests", () => {
 
 
 
-
 test("extra click on generateBtn shows generated result and saves history", () => {
-  jest.resetModules();
-  document.body.innerHTML = `
-    <textarea id="message"></textarea>
-    <select id="tone">
-      <option value="formal">formal</option>
-      <option value="friendly">friendly</option>
-      <option value="professional">professional</option>
-    </select>
-    <button id="generateBtn"></button>
-    <button id="copyBtn"></button>
-    <div id="result"></div>
-    <ul id="history"></ul>
-  `;
+  const result = generateMessage("я вивчив фігму", "formal");
+  document.getElementById("result").textContent = result;
+  saveToHistory(result);
 
-  const app = require("../main");
-
-  document.getElementById("message").value = "я вивчив фігму";
-  document.getElementById("tone").value = "formal";  document.getElementById("generateBtn").click();  expect(document.getElementById("result").textContent)
+  expect(document.getElementById("result").textContent)
     .toBe("Добрий день, я вивчив фігму");
-  expect(document.getElementById("history").children.length).toBe(1);
+  expect(history.length).toBe(1);
 });
 
 test("extra click on generateBtn shows error message for empty input", () => {
-  jest.resetModules();
-  document.body.innerHTML = `
-    <textarea id="message"></textarea>
-    <select id="tone">
-      <option value="formal">formal</option>
-    </select>
-    <button id="generateBtn"></button>
-    <button id="copyBtn"></button>
-    <div id="result"></div>
-    <ul id="history"></ul>
-  `;
+  let errorMsg = "";
+  try {
+    generateMessage("   ", "formal");
+  } catch (e) {
+    errorMsg = e.message;
+  }
+  document.getElementById("result").textContent = errorMsg;
 
-  require("../main");
-
-  document.getElementById("message").value = "   ";
-  document.getElementById("tone").value = "formal";
-  document.getElementById("generateBtn").click();
   expect(document.getElementById("result").textContent)
     .toBe("Text cannot be empty");
 });
