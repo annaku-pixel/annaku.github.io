@@ -18,15 +18,16 @@ function inputText(text) {
     throw new Error("Text cannot be empty");
   }
 
-  if (trimmed.length > 500) {
+  const MAX_TEXT_LENGTH = 500;
+  if (trimmed.length > MAX_TEXT_LENGTH) {
     throw new Error("Text is too long");
   }
 
   return trimmed;
 }
 
-function formatPunctuation(text) {
-  let result = text
+function normalizePunctuation(text) {
+  return text
     .trim()
     .replace(/\s*,\s*/g, ", ")
     .replace(/\s*\.\s*/g, ". ")
@@ -35,31 +36,45 @@ function formatPunctuation(text) {
     .replace(/\s+/g, " ")
     .trim()
     .toLowerCase();
+}
 
-  result = result.replace(/(^|[.!?]\s+)([a-zа-яёіїєґ])/giu, (match, start, letter) => {
+function capitalizeAfterSentenceEnd(text) {
+  return text.replace(/(^|[.!?]\s+)([a-zа-яёіїєґ])/giu, (match, start, letter) => {
     return start + letter.toUpperCase();
   });
+}
 
-  result = result.replace(/,\s*([a-zа-яёіїєґ])/giu, (match, letter) => {
+function lowercaseAfterComma(text) {
+  return text.replace(/,\s*([a-zа-яёіїєґ])/giu, (match, letter) => {
     return ", " + letter.toLowerCase();
   });
+}
 
+function formatPunctuation(text) {
+  let result = normalizePunctuation(text);
+  result = capitalizeAfterSentenceEnd(result);
+  result = lowercaseAfterComma(result);
   return result;
+}
+
+const MESSAGE_PREFIXES = {
+  formal: "Добрий день,",
+  friendly: "Привіт!",
+  professional: "Вітаю,"
+};
+
+function removeExistingGreeting(text) {
+  return text
+    .trim()
+    .replace(/^(привіт!?|добрий день,?|вітаю,?)\s*/i, "");
 }
 
 function generateMessage(text, tone) {
   const validText = inputText(text);
-  let result = "";
+  const cleanedText = removeExistingGreeting(validText);
 
-  if (tone === "formal") {
-    result = `Добрий день, ${validText}`;
-  } else if (tone === "friendly") {
-    result = `Привіт! ${validText}`;
-  } else {
-    result = `Вітаю, ${validText}`;
-  }
-
-  return formatPunctuation(result);
+  const prefix = MESSAGE_PREFIXES[tone] || MESSAGE_PREFIXES.professional;
+  return formatPunctuation(`${prefix} ${cleanedText}`);
 }
 
 function saveToHistory(result) {
