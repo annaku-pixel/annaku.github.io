@@ -4,7 +4,7 @@ const generateBtn = document.getElementById("generateBtn");
 const copyBtn = document.getElementById("copyBtn");
 const resultBlock = document.getElementById("result");
 const historyList = document.getElementById("history");
-
+ 
 const history = [];
 
 function inputText(text) {
