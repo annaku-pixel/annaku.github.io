@@ -1,5 +1,5 @@
 let history, inputText, formatPunctuation, generateMessage, saveToHistory, copyResult;
-
+ 
 beforeAll(() => {
   document.body.innerHTML = `
     <input id="message" />
