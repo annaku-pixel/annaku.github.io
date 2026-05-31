@@ -117,9 +117,6 @@ test("extra click on generateBtn shows generated result and saves history", () =
   const result = generateMessage("я вивчив фігму", "formal");
   document.getElementById("result").textContent = result;
   saveToHistory(result);
-  
-  jest.resetModules();
-  require("../main");
 
   document.getElementById("message").value = "я вивчив фігму";
   document.getElementById("tone").value = "formal";  document.getElementById("generateBtn").click();  expect(document.getElementById("result").textContent)
