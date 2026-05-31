@@ -94,9 +94,9 @@ describe("Рижова tests", () => {
   });
 
   test("TC-11 saveToHistory stores result", () => {
-    const result = "Тест";
-    saveToHistory(result);
-    expect(history).toEqual(["Тест"]);
+    saveToHistory("Перший");
+    saveToHistory("Другий");
+    expect(history).toEqual(["Перший", "Другий"]); 
   });
 
   test("TC-12 copyResult throws error for empty text", () => {

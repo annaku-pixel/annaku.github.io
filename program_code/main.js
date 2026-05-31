@@ -79,10 +79,15 @@ function generateMessage(text, tone) {
 
 function saveToHistory(result) {
   history.push(result);
+}
+
+function updateHistoryUI() {
   renderHistory();
 }
 
 function renderHistory() {
+  if (!historyList) return;
+
   historyList.innerHTML = "";
 
   history.forEach((item) => {
@@ -97,17 +102,17 @@ function copyResult(text) {
     throw new Error("Немає тексту для копіювання");
   }
 
-  navigator.clipboard.writeText(text);
+  if (!navigator.clipboard || !navigator.clipboard.writeText) {
+    return text;
+  }
+
+  return navigator.clipboard.writeText(text);
 }
 
-generateBtn.addEventListener("click", () => {
+copyBtn.addEventListener("click", async () => {
   try {
-    const text = messageInput.value;
-    const tone = toneSelect.value;
-
-    const result = generateMessage(text, tone);
-    resultBlock.textContent = result;
-    saveToHistory(result);
+    await copyResult(resultBlock.textContent);
+    alert("Результат скопійовано");
   } catch (error) {
     resultBlock.textContent = error.message;
   }
