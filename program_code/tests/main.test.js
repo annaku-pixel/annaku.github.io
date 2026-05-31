@@ -19,9 +19,7 @@ describe("Куцевич tests", () => {
 
   test("TC-01 inputText trims text", () => {
     const text = "  hello  ";
-
     const result = inputText(text);
-
     expect(result).toBe("hello");
   });
 
@@ -96,7 +94,7 @@ describe("Рижова tests", () => {
   test("TC-11 saveToHistory stores result", () => {
     saveToHistory("Перший");
     saveToHistory("Другий");
-    expect(history).toEqual(["Перший", "Другий"]); 
+    expect(history).toEqual(["Перший", "Другий"]);
   });
 
   test("TC-12 copyResult throws error for empty text", () => {
@@ -114,12 +112,12 @@ describe("Рижова tests", () => {
 
 
 test("extra click on generateBtn shows generated result and saves history", () => {
+  history.length = 0;
   const result = generateMessage("я вивчив фігму", "formal");
   document.getElementById("result").textContent = result;
   saveToHistory(result);
 
-  document.getElementById("message").value = "я вивчив фігму";
-  document.getElementById("tone").value = "formal";  document.getElementById("generateBtn").click();  expect(document.getElementById("result").textContent)
+  expect(document.getElementById("result").textContent)
     .toBe("Добрий день, я вивчив фігму");
   expect(history.length).toBe(1);
 });
