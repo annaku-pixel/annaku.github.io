@@ -75,7 +75,7 @@ function generateMessage(text, tone) {
   return formatPunctuation(`${prefix} ${cleanedText}`);
 }
 
-module.exports = {
+const exportedApi = {
   MESSAGE_PREFIXES,
   ALLOWED_TONES,
   MAX_TEXT_LENGTH,
@@ -83,3 +83,11 @@ module.exports = {
   formatPunctuation,
   generateMessage
 };
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = exportedApi;
+}
+
+if (globalThis.window !== undefined) {
+  globalThis.window.AnswerBetterCore = exportedApi;
+}
