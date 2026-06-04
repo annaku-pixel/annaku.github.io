@@ -1,11 +1,10 @@
 {
   "name": "answerbetter-sr",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "../../server.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "jest",
-    "coverage": "jest --coverage"
+    "test": "jest --config jest.config.js --runInBand",
+    "coverage": "jest --config jest.config.js --coverage --runInBand"
   },
   "dependencies": {
     "express": "^4.19.2"
