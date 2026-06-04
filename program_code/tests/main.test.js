@@ -1,5 +1,6 @@
-let history, inputText, formatPunctuation, generateMessage, saveToHistory, copyResult;
- 
+let history, saveToHistory, copyResult;
+let inputText, formatPunctuation, generateMessage;
+
 beforeAll(() => {
   document.body.innerHTML = `
     <input id="message" />
@@ -9,7 +10,9 @@ beforeAll(() => {
     <div id="result"></div>
     <ul id="history"></ul>
   `;
-  ({ history, inputText, formatPunctuation, generateMessage, saveToHistory, copyResult } = require("../main"));
+
+  ({ inputText, formatPunctuation, generateMessage } = require("../answerbetter-core"));
+  ({ history, saveToHistory, copyResult } = require("../main"));
 });
  
 describe("Куцевич tests", () => {
