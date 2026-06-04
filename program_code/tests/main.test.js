@@ -137,3 +137,17 @@ test("extra click on generateBtn shows error message for empty input", () => {
   expect(document.getElementById("result").textContent)
     .toBe("Text cannot be empty");
 });
+
+// new tests
+
+test("extra main.js click on generateBtn shows error for empty input", () => {
+  history.length = 0;
+
+  document.getElementById("message").value = "   ";
+  document.getElementById("tone").value = "formal";
+
+  document.getElementById("generateBtn").click();
+
+  expect(document.getElementById("result").textContent)
+    .toBe("Text cannot be empty");
+});
