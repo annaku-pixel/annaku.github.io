@@ -1,72 +1,14 @@
-const messageInput = document.getElementById("message");
-const toneSelect = document.getElementById("tone");
-const generateBtn = document.getElementById("generateBtn");
-const copyBtn = document.getElementById("copyBtn");
+const {
+  generateMessage
+} = require("./answerbetter-core");
+
 const resultBlock = document.getElementById("result");
 const historyList = document.getElementById("history");
 
 const history = [];
 
-function inputText(text) {
-  if (typeof text !== "string") {
-    throw new TypeError("Text must be a string");
-  }
- 
-  const trimmed = text.trim();
-
-  if (trimmed.length === 0) {
-    throw new Error("Text cannot be empty");
-  }
-
-  if (trimmed.length > 500) {
-    throw new Error("Text is too long");
-  }
-
-  return trimmed;
-}
-
-function formatPunctuation(text) {
-  let result = text
-    .trim()
-    .replace(/\s*,\s*/g, ", ")
-    .replace(/\s*\.\s*/g, ". ")
-    .replace(/\s*!\s*/g, "! ")
-    .replace(/\s*\?\s*/g, "? ")
-    .replace(/\s+/g, " ")
-    .trim()
-    .toLowerCase();
-
-  result = result.replace(/(^|[.!?]\s+)([a-zа-яёіїєґ])/giu, (match, start, letter) => {
-    return start + letter.toUpperCase();
-  });
-
-  result = result.replace(/,\s*([a-zа-яёіїєґ])/giu, (match, letter) => {
-    return ", " + letter.toLowerCase();
-  });
-
-  return result;
-}
-
-function generateMessage(text, tone) {
-  const validText = inputText(text);
-  let result = "";
-
-  if (tone === "formal") {
-    result = `Добрий день, ${validText}`;
-  } else if (tone === "friendly") {
-    result = `Привіт! ${validText}`;
-  } else {
-    result = `Вітаю, ${validText}`;
-  }
-
-  return formatPunctuation(result);
-}
-
 function saveToHistory(result) {
   history.push(result);
-}
-
-function updateHistoryUI() {
   renderHistory();
 }
 
@@ -87,14 +29,23 @@ function copyResult(text) {
     throw new Error("Немає тексту для копіювання");
   }
 
-  if (!navigator.clipboard || !navigator.clipboard.writeText) {
-    return text;
-  }
-
-  return navigator.clipboard.writeText(text);
+  return navigator.clipboard?.writeText?.(text) ?? text;
 }
 
-copyBtn.addEventListener("click", async () => {
+document.getElementById("generateBtn").addEventListener("click", () => {
+  try {
+    const text = document.getElementById("message").value;
+    const tone = document.getElementById("tone").value;
+
+    const result = generateMessage(text, tone);
+    resultBlock.textContent = result;
+    saveToHistory(result);
+  } catch (error) {
+    resultBlock.textContent = error.message;
+  }
+});
+
+document.getElementById("copyBtn").addEventListener("click", async () => {
   try {
     await copyResult(resultBlock.textContent);
     alert("Результат скопійовано");
@@ -103,20 +54,10 @@ copyBtn.addEventListener("click", async () => {
   }
 });
 
-copyBtn.addEventListener("click", () => {
-  try {
-    copyResult(resultBlock.textContent);
-    alert("Результат скопійовано");
-  } catch (error) {
-    resultBlock.textContent = error.message;
-  }
-});
-
-module.exports = {
-  history,
-  inputText,
-  formatPunctuation,
-  generateMessage,
-  saveToHistory,
-  copyResult
-};
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    history,
+    saveToHistory,
+    copyResult
+  };
+}
