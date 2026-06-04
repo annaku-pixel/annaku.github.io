@@ -1,6 +1,7 @@
 const generateMessage =
-  globalThis.window?.AnswerBetterCore?.generateMessage ??
-  require("./answerbetter-core").generateMessage;
+(globalThis.window?.AnswerBetterCore?.generateMessage === undefined)
+    ? require("./answerbetter-core").generateMessage
+    : globalThis.window.AnswerBetterCore.generateMessage;
   
 const resultBlock = document.getElementById("result");
 const historyList = document.getElementById("history");
