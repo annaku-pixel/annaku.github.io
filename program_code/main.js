@@ -1,7 +1,7 @@
-const {
-  generateMessage
-} = require("./answerbetter-core");
-
+const generateMessage =
+  globalThis.window?.AnswerBetterCore?.generateMessage ??
+  require("./answerbetter-core").generateMessage;
+  
 const resultBlock = document.getElementById("result");
 const historyList = document.getElementById("history");
 
